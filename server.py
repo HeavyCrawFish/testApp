@@ -5,7 +5,7 @@ from pytube import YouTube
 from flask import send_file
 import os
 
-app = Flask(__name__,static_folder='app/build',static_url_path='')
+app = Flask(__name__,static_folder='app/build')
 cors = CORS(app)
 # members api route
 
@@ -55,10 +55,11 @@ def get_files():
     except Exception as e:
         abort(404)
 
-@app.route('/')
+@app.route('/',defaults={"path":""})
+@app.route('<path:path>')
 @cross_origin()
 def serve():
-    return send_from_directory(app.static_folder, 'index.html')
+    return app.send_static_file('index.html')
 
 if __name__=="__main__":
     app.run(debug=True,host='0.0.0.0')
