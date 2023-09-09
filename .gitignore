@@ -32,7 +32,6 @@ yarn-error.log*
 /app/coverage
 
 # production
-/app/build
 
 # misc
 .DS_Store
